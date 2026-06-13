@@ -1,4 +1,5 @@
 import { Calendar, MapPin, Building2 } from "lucide-react";
+import { FadeIn } from "./scroll-animation";
 
 type Skill = {
   id: string;
@@ -37,17 +38,19 @@ export function ExperiencesSection({ experiences }: Props) {
     <section id="experiences" className="py-24 bg-muted/30">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section heading */}
-        <div className="mb-16 text-center">
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">
-            Work History
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
-            Experience
-          </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto text-sm">
-            My professional journey and the roles where I've made an impact.
-          </p>
-        </div>
+        <FadeIn direction="up">
+          <div className="mb-16 text-center">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">
+              Work History
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+              Experience
+            </h2>
+            <p className="text-muted-foreground max-w-lg mx-auto text-sm">
+              My professional journey and the roles where I've made an impact.
+            </p>
+          </div>
+        </FadeIn>
 
         {experiences.length === 0 ? (
           <p className="text-center text-muted-foreground">
@@ -63,8 +66,10 @@ export function ExperiencesSection({ experiences }: Props) {
                 const isLeft = idx % 2 === 0;
 
                 return (
-                  <div
+                  <FadeIn
                     key={exp.id}
+                    direction={isLeft ? "left" : "right"}
+                    delay={idx * 0.1}
                     className={`relative flex gap-6 sm:gap-0 ${
                       isLeft ? "sm:flex-row" : "sm:flex-row-reverse"
                     }`}
@@ -145,7 +150,7 @@ export function ExperiencesSection({ experiences }: Props) {
                         )}
                       </div>
                     </div>
-                  </div>
+                  </FadeIn>
                 );
               })}
             </div>

@@ -40,7 +40,7 @@ export function Footer() {
             </a>
 
             <a
-              href="https://github.com/bagaspra16"
+              href="https://github.com/Bagasprbw"
               target="_blank"
               rel="noreferrer"
               className="group flex items-center gap-4 p-4 rounded-2xl border border-border bg-background hover:border-primary/40 hover:bg-muted/40 hover:shadow-md transition-all"
@@ -51,13 +51,13 @@ export function Footer() {
               <div>
                 <p className="text-xs text-muted-foreground font-medium">Find me on GitHub</p>
                 <p className="text-sm font-semibold text-foreground">
-                  github.com/bagaspra16
+                  https://github.com/Bagasprbw
                 </p>
               </div>
             </a>
 
             <a
-              href="https://linkedin.com/in/bagas-prabowo"
+              href="https://www.linkedin.com/in/bagas-prabowo-367932340"
               target="_blank"
               rel="noreferrer"
               className="group flex items-center gap-4 p-4 rounded-2xl border border-border bg-background hover:border-primary/40 hover:bg-muted/40 hover:shadow-md transition-all"
@@ -68,7 +68,7 @@ export function Footer() {
               <div>
                 <p className="text-xs text-muted-foreground font-medium">Connect on LinkedIn</p>
                 <p className="text-sm font-semibold text-foreground">
-                  linkedin.com/in/bagas-prabowo
+                  https://www.linkedin.com/in/bagas-prabowo-367932340
                 </p>
               </div>
             </a>

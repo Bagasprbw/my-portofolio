@@ -39,7 +39,7 @@ export function Navbar() {
           <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
             <Code2 size={16} className="text-primary-foreground" />
           </div>
-          <span>Bagas.</span>
+          <span>Bagas Prabowo</span>
         </Link>
 
         {/* Desktop nav */}

@@ -1,4 +1,5 @@
 import { ExternalLink, Star } from "lucide-react";
+import { FadeIn, StaggerContainer, StaggerItem } from "./scroll-animation";
 
 type Skill = {
   id: string;
@@ -31,17 +32,19 @@ export function ProjectsSection({ projects }: Props) {
     <section id="projects" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section heading */}
-        <div className="mb-16 text-center">
-          <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">
-            Portfolio
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
-            Featured Projects
-          </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto text-sm">
-            A selection of projects I've built — from concept to deployment.
-          </p>
-        </div>
+        <FadeIn direction="up">
+          <div className="mb-16 text-center">
+            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">
+              Portfolio
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+              Featured Projects
+            </h2>
+            <p className="text-muted-foreground max-w-lg mx-auto text-sm">
+              A selection of projects I've built — from concept to deployment.
+            </p>
+          </div>
+        </FadeIn>
 
         {projects.length === 0 ? (
           <p className="text-center text-muted-foreground">
@@ -51,20 +54,24 @@ export function ProjectsSection({ projects }: Props) {
           <div className="space-y-12">
             {/* Featured projects – big cards */}
             {featured.length > 0 && (
-              <div className="grid md:grid-cols-2 gap-6">
+              <StaggerContainer className="grid md:grid-cols-2 gap-6">
                 {featured.map((project) => (
-                  <ProjectCard key={project.id} project={project} featured />
+                  <StaggerItem key={project.id}>
+                    <ProjectCard project={project} featured />
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerContainer>
             )}
 
             {/* Regular projects – smaller grid */}
             {regular.length > 0 && (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {regular.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
+                  <StaggerItem key={project.id}>
+                    <ProjectCard project={project} />
+                  </StaggerItem>
                 ))}
-              </div>
+              </StaggerContainer>
             )}
           </div>
         )}
