@@ -69,7 +69,10 @@ const DEVICON_MAP: Record<string, string> = {
   "prisma": "prisma/prisma-original.svg",
   "drizzle": "drizzle/drizzle-original.svg",
   "laragon": "https://laragon.org/logo.svg",
-  "xampp": "https://upload.wikimedia.org/wikipedia/commons/f/f0/XAMPP_logo.svg",
+  "xampp": "https://www.svgrepo.com/show/354562/xampp.svg",
+  "inertia": "https://cdn.jsdelivr.net/npm/@thesvg/icons/icons/inertia.svg",
+  "inertiajs": "https://cdn.jsdelivr.net/npm/@thesvg/icons/icons/inertia.svg",
+  "inertia.js": "https://cdn.jsdelivr.net/npm/@thesvg/icons/icons/inertia.svg",
 };
 
 function getDeviconUrl(skillName: string): string {
