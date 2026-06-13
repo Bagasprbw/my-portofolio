@@ -150,7 +150,7 @@ function ProjectCard({
         >
           {project.title}
         </h3>
-        <div className="text-sm text-muted-foreground leading-relaxed h-20 overflow-y-auto pr-1 flex-1 custom-scrollbar">
+        <div className="text-sm text-muted-foreground leading-relaxed h-24 max-h-24 overflow-y-auto pr-1 custom-scrollbar">
           {project.description}
         </div>
 
