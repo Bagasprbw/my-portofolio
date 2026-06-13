@@ -1,3 +1,5 @@
+"use client";
+
 import { ExternalLink, Star } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "./scroll-animation";
 

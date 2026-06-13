@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, Check } from "lucide-react";
+import { Plus, Check, X, Image as ImageIcon } from "lucide-react";
 import { createProject } from "../_actions/project";
 
 type Skill = {
@@ -28,7 +28,8 @@ export function AddProjectDialog({ skills }: Props) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [url, setUrl] = useState("");
   const [featured, setFeatured] = useState(false);
   const [selectedSkillIds, setSelectedSkillIds] = useState<string[]>([]);
@@ -43,6 +44,23 @@ export function AddProjectDialog({ skills }: Props) {
     );
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      const url = URL.createObjectURL(selectedFile);
+      setPreviewUrl(url);
+    }
+  };
+
+  const handleRemoveFile = () => {
+    setFile(null);
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+      setPreviewUrl(null);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !description.trim()) return;
@@ -50,10 +68,25 @@ export function AddProjectDialog({ skills }: Props) {
     setLoading(true);
     setError(null);
     try {
+      let uploadedThumbnailUrl = "";
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const uploadRes = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        if (!uploadRes.ok) {
+          throw new Error("Failed to upload thumbnail image");
+        }
+        const uploadData = await uploadRes.json();
+        uploadedThumbnailUrl = uploadData.url;
+      }
+
       const result = await createProject(
         title,
         description,
-        thumbnail || undefined,
+        uploadedThumbnailUrl || undefined,
         url || undefined,
         featured,
         selectedSkillIds
@@ -62,7 +95,8 @@ export function AddProjectDialog({ skills }: Props) {
       if (result.success) {
         setTitle("");
         setDescription("");
-        setThumbnail("");
+        setFile(null);
+        setPreviewUrl(null);
         setUrl("");
         setFeatured(false);
         setSelectedSkillIds([]);
@@ -70,8 +104,8 @@ export function AddProjectDialog({ skills }: Props) {
       } else {
         setError(result.error || "Failed to create project");
       }
-    } catch (err) {
-      setError("An unexpected error occurred");
+    } catch (err: any) {
+      setError(err.message || "An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -124,27 +158,58 @@ export function AddProjectDialog({ skills }: Props) {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium leading-none">
-                Thumbnail URL (Optional)
+              <label className="text-sm font-medium leading-none block mb-1">
+                Thumbnail Image (Optional)
               </label>
-              <Input
-                placeholder="https://example.com/thumbnail.png"
-                value={thumbnail}
-                onChange={(e) => setThumbnail(e.target.value)}
-                disabled={loading}
-              />
+              {previewUrl ? (
+                <div className="relative rounded-lg overflow-hidden border border-border bg-muted/30 aspect-video max-h-[120px] flex items-center justify-center">
+                  <img
+                    src={previewUrl}
+                    alt="Thumbnail preview"
+                    className="object-cover w-full h-full"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleRemoveFile}
+                    className="absolute top-2 right-2 bg-destructive text-destructive-foreground rounded-full p-1 hover:bg-destructive/90 shadow-sm transition-colors cursor-pointer"
+                  >
+                    <X size={12} />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center w-full">
+                  <label className="flex flex-col items-center justify-center w-full h-[120px] border-2 border-dashed rounded-lg cursor-pointer bg-muted/10 hover:bg-muted/20 border-muted-foreground/20 hover:border-muted-foreground/40 transition-colors">
+                    <div className="flex flex-col items-center justify-center pt-3 pb-4 text-center px-2">
+                      <ImageIcon className="w-6 h-6 mb-1 text-muted-foreground" />
+                      <p className="text-[11px] text-muted-foreground font-semibold">
+                        Click to upload
+                      </p>
+                      <p className="text-[9px] text-muted-foreground/80 mt-0.5">PNG, JPG, WEBP</p>
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleFileChange}
+                      disabled={loading}
+                    />
+                  </label>
+                </div>
+              )}
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium leading-none">
-                Project Link URL (Optional)
-              </label>
-              <Input
-                placeholder="https://github.com/... or live site"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                disabled={loading}
-              />
+            <div className="space-y-2 flex flex-col justify-between">
+              <div className="space-y-2">
+                <label className="text-sm font-medium leading-none">
+                  Project Link URL (Optional)
+                </label>
+                <Input
+                  placeholder="https://github.com/... or live site"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  disabled={loading}
+                />
+              </div>
             </div>
           </div>
 

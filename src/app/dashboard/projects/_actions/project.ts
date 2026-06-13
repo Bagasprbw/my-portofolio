@@ -4,6 +4,25 @@ import { db } from "@/db";
 import { projects, projectSkills } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { unlink } from "fs/promises";
+import path from "path";
+import { existsSync } from "fs";
+
+async function deleteThumbnailFile(thumbnailPath?: string | null) {
+  if (!thumbnailPath) return;
+  // Check if it's a local upload
+  if (thumbnailPath.startsWith("/uploads/")) {
+    const filename = thumbnailPath.replace("/uploads/", "");
+    const filepath = path.join(process.cwd(), "public", "uploads", filename);
+    try {
+      if (existsSync(filepath)) {
+        await unlink(filepath);
+      }
+    } catch (err) {
+      console.error("Failed to delete old thumbnail file:", err);
+    }
+  }
+}
 
 export async function createProject(
   title: string,
@@ -71,6 +90,14 @@ export async function updateProject(
       .replace(/[\s_-]+/g, "-")
       .replace(/^-+|-+$/g, "") + "-" + id.substring(0, 4);
 
+    // Get current project thumbnail to check if it has changed
+    const [existingProject] = await db
+      .select({ thumbnail: projects.thumbnail })
+      .from(projects)
+      .where(eq(projects.id, id));
+
+    const oldThumbnail = existingProject?.thumbnail;
+
     await db.transaction(async (tx) => {
       await tx
         .update(projects)
@@ -99,6 +126,11 @@ export async function updateProject(
       }
     });
 
+    // If thumbnail has changed or been removed, delete the old file
+    if (oldThumbnail && oldThumbnail !== (thumbnail || null)) {
+      await deleteThumbnailFile(oldThumbnail);
+    }
+
     revalidatePath("/dashboard/projects");
     return { success: true };
   } catch (error: any) {
@@ -109,7 +141,18 @@ export async function updateProject(
 
 export async function deleteProject(id: string) {
   try {
+    // Get current project thumbnail before deleting
+    const [project] = await db
+      .select({ thumbnail: projects.thumbnail })
+      .from(projects)
+      .where(eq(projects.id, id));
+
     await db.delete(projects).where(eq(projects.id, id));
+
+    if (project?.thumbnail) {
+      await deleteThumbnailFile(project.thumbnail);
+    }
+
     revalidatePath("/dashboard/projects");
     return { success: true };
   } catch (error) {
