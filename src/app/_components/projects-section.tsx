@@ -150,9 +150,9 @@ function ProjectCard({
         >
           {project.title}
         </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 flex-1">
+        <div className="text-sm text-muted-foreground leading-relaxed h-20 overflow-y-auto pr-1 flex-1 custom-scrollbar">
           {project.description}
-        </p>
+        </div>
 
         {/* Skills */}
         {project.projectSkills.length > 0 && (
