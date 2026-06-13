@@ -18,4 +18,8 @@ export const authOptions: NextAuthOptions = {
             return user.email === process.env.ADMIN_EMAIL;
         },
     },
+
+    session: {
+        strategy: "jwt",
+    },
 };
