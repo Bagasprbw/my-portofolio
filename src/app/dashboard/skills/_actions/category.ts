@@ -13,6 +13,7 @@ export async function createCategory(name: string) {
       .returning();
 
     revalidatePath("/dashboard/skills");
+    revalidatePath("/");
     return { success: true, data: result[0] };
   } catch (error) {
     return { success: false, error: "Failed to create category" };
@@ -26,6 +27,7 @@ export async function deleteCategory(id: string) {
       .where(eq(skillCategories.id, id));
 
     revalidatePath("/dashboard/skills");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     return { success: false, error: "Failed to delete category" };
@@ -40,6 +42,7 @@ export async function updateCategory(id: string, name: string) {
       .where(eq(skillCategories.id, id));
 
     revalidatePath("/dashboard/skills");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     return { success: false, error: "Failed to update category" };

@@ -28,11 +28,15 @@ type Props = {
 };
 
 export function ExperiencesSection({ experiences }: Props) {
-  const formatDate = (dateStr: string) =>
-    new Date(dateStr).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-    });
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return "N/A";
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    return `${months[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
+  };
 
   return (
     <section id="experiences" className="py-24 bg-muted/30">

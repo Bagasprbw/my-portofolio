@@ -21,6 +21,7 @@ export async function createSkill(
       .returning();
 
     revalidatePath("/dashboard/skills");
+    revalidatePath("/");
     return { success: true, data: result[0] };
   } catch (error) {
     return { success: false, error: "Failed to create skill" };
@@ -34,6 +35,7 @@ export async function deleteSkill(id: string) {
       .where(eq(skills.id, id));
 
     revalidatePath("/dashboard/skills");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     return { success: false, error: "Failed to delete skill" };
@@ -57,6 +59,7 @@ export async function updateSkill(
       .where(eq(skills.id, id));
 
     revalidatePath("/dashboard/skills");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     return { success: false, error: "Failed to update skill" };

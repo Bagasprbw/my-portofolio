@@ -66,6 +66,7 @@ export async function createProject(
     });
 
     revalidatePath("/dashboard/projects");
+    revalidatePath("/");
     return { success: true, data: result };
   } catch (error: any) {
     console.error("Error creating project:", error);
@@ -132,6 +133,7 @@ export async function updateProject(
     }
 
     revalidatePath("/dashboard/projects");
+    revalidatePath("/");
     return { success: true };
   } catch (error: any) {
     console.error("Error updating project:", error);
@@ -154,6 +156,7 @@ export async function deleteProject(id: string) {
     }
 
     revalidatePath("/dashboard/projects");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error("Error deleting project:", error);

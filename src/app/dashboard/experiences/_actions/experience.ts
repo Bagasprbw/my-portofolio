@@ -45,6 +45,7 @@ export async function createExperience(
     });
 
     revalidatePath("/dashboard/experiences");
+    revalidatePath("/");
     return { success: true, data: result };
   } catch (error: any) {
     console.error("Error creating experience:", error);
@@ -96,6 +97,7 @@ export async function updateExperience(
     });
 
     revalidatePath("/dashboard/experiences");
+    revalidatePath("/");
     return { success: true };
   } catch (error: any) {
     console.error("Error updating experience:", error);
@@ -107,6 +109,7 @@ export async function deleteExperience(id: string) {
   try {
     await db.delete(experiences).where(eq(experiences.id, id));
     revalidatePath("/dashboard/experiences");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error("Error deleting experience:", error);
