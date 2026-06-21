@@ -17,6 +17,9 @@ const bricolageGrotesque = Bricolage_Grotesque({
 export const metadata: Metadata = {
   title: "Bagas Prabowo – Full Stack Developer",
   description: "I build beautiful, performant, and scalable web applications with modern technologies. Turning ideas into elegant digital experiences.",
+  verification: {
+    google: "5wnbZ4cuIbWkjAVo7_s0gHxeCW_VBQ-LSE1Y_N-quNw",
+  },
 };
 
 export default function RootLayout({
