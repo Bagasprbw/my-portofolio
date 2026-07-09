@@ -62,7 +62,7 @@ export function AboutSection() {
             <StaggerItem>
               <div className="pt-4 flex flex-wrap gap-4">
                 <a
-                  href="/cv.pdf"
+                  href="/CV-Bagas Prabowo.pdf"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-md shadow-primary/20"
