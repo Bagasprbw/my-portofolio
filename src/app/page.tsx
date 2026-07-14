@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { skills, projects, experiences, skillCategories } from "@/db/schema";
+import { projects, experiences } from "@/db/schema";
 import { Navbar } from "./_components/navbar";
 import { HeroSection } from "./_components/hero-section";
 import { AboutSection } from "./_components/about-section";
@@ -15,30 +15,32 @@ export const metadata = {
     "Portfolio of Bagas Prabowo, a passionate Full Stack Developer specializing in building beautiful and performant web applications.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
-  const allSkillCategories = await db.query.skillCategories.findMany({
-    with: {
-      skills: true,
-    },
-  });
-
-  const allProjects = await db.query.projects.findMany({
-    with: {
-      projectSkills: {
-        with: { skill: true },
+  const [allSkillCategories, allProjects, allExperiences] = await Promise.all([
+    db.query.skillCategories.findMany({
+      with: {
+        skills: true,
       },
-    },
-    orderBy: [desc(projects.createdAt)],
-  });
-
-  const allExperiences = await db.query.experiences.findMany({
-    with: {
-      experienceSkills: {
-        with: { skill: true },
+    }),
+    db.query.projects.findMany({
+      with: {
+        projectSkills: {
+          with: { skill: true },
+        },
       },
-    },
-    orderBy: [desc(experiences.startDate)],
-  });
+      orderBy: [desc(projects.createdAt)],
+    }),
+    db.query.experiences.findMany({
+      with: {
+        experienceSkills: {
+          with: { skill: true },
+        },
+      },
+      orderBy: [desc(experiences.startDate)],
+    }),
+  ]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">

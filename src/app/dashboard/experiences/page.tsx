@@ -1,25 +1,23 @@
 import { db } from "@/db";
-import { experiences, skills } from "@/db/schema";
 import { ExperienceTable } from "./_components/experience-table";
 import { AddExperienceDialog } from "./_components/add-experience-dialog";
 
 export default async function ExperiencesPage() {
-  // Fetch experiences with their associated skills
-  const allExperiences = await db.query.experiences.findMany({
-    with: {
-      experienceSkills: {
-        with: {
-          skill: true,
+  const [allExperiences, allSkills] = await Promise.all([
+    db.query.experiences.findMany({
+      with: {
+        experienceSkills: {
+          with: {
+            skill: true,
+          },
         },
       },
-    },
-    orderBy: (experiences, { desc }) => [desc(experiences.startDate)],
-  });
-
-  // Fetch all available skills for tagging
-  const allSkills = await db.query.skills.findMany({
-    orderBy: (skills, { asc }) => [asc(skills.name)],
-  });
+      orderBy: (experiences, { desc }) => [desc(experiences.startDate)],
+    }),
+    db.query.skills.findMany({
+      orderBy: (skills, { asc }) => [asc(skills.name)],
+    }),
+  ]);
 
   return (
     <div className="space-y-6">

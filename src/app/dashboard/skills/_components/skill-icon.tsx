@@ -110,16 +110,20 @@ function isEmoji(str: string): boolean {
 }
 
 export function SkillIcon({ icon, name, className = "w-8 h-8 flex items-center justify-center shrink-0" }: SkillIconProps) {
-  // We track states:
-  // "custom" -> trying to render user's custom icon input (image url, SVG, emoji)
-  // "devicon" -> custom failed or was empty or was a devicon key, trying to render guessed Devicon URL
-  // "initial" -> devicon also failed, rendering name initial
-  const [renderStage, setRenderStage] = useState<"custom" | "devicon" | "initial">("custom");
-
   const trimmed = icon?.trim() || "";
 
+  const [renderStage, setRenderStage] = useState<"custom" | "devicon" | "initial">(() => {
+    const isUrl = trimmed.startsWith("http") || trimmed.startsWith("/");
+    const isSvg = trimmed.startsWith("<svg");
+    const isCustomEmoji = trimmed && isEmoji(trimmed) && trimmed.length <= 4;
+
+    if (isUrl || isSvg || isCustomEmoji) {
+      return "custom";
+    }
+    return "devicon";
+  });
+
   useEffect(() => {
-    // Determine if we should attempt custom render or go straight to devicon CDN
     const isUrl = trimmed.startsWith("http") || trimmed.startsWith("/");
     const isSvg = trimmed.startsWith("<svg");
     const isCustomEmoji = trimmed && isEmoji(trimmed) && trimmed.length <= 4;
@@ -129,7 +133,7 @@ export function SkillIcon({ icon, name, className = "w-8 h-8 flex items-center j
     } else {
       setRenderStage("devicon");
     }
-  }, [icon, name]);
+  }, [trimmed]);
 
   // Render stage: custom (if user provided a valid url/path)
   if (renderStage === "custom") {

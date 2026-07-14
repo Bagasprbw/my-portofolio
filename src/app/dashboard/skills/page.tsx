@@ -1,23 +1,19 @@
 import { db } from "@/db";
 
-import {
-    skills,
-    skillCategories,
-} from "@/db/schema";
-
 import { SkillTable } from "./_components/skill-table";
 import { AddSkillDialog } from "./_components/add-skill-dialog";
 import { AddCategoryDialog } from "./_components/add-category-dialog";
 import { CategoryTable } from "./_components/category-table";
 
 export default async function SkillsPage() {
-    const allSkills = await db.query.skills.findMany({
-        with: {
-            category: true,
-        },
-    });
-
-    const categories = await db.query.skillCategories.findMany();
+    const [allSkills, categories] = await Promise.all([
+        db.query.skills.findMany({
+            with: {
+                category: true,
+            },
+        }),
+        db.query.skillCategories.findMany(),
+    ]);
 
     return (
         <div className="space-y-8">

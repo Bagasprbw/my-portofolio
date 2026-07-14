@@ -1,25 +1,23 @@
 import { db } from "@/db";
-import { projects, skills } from "@/db/schema";
 import { ProjectTable } from "./_components/project-table";
 import { AddProjectDialog } from "./_components/add-project-dialog";
 
 export default async function ProjectsPage() {
-  // Fetch projects with their associated skills
-  const allProjects = await db.query.projects.findMany({
-    with: {
-      projectSkills: {
-        with: {
-          skill: true,
+  const [allProjects, allSkills] = await Promise.all([
+    db.query.projects.findMany({
+      with: {
+        projectSkills: {
+          with: {
+            skill: true,
+          },
         },
       },
-    },
-    orderBy: (projects, { desc }) => [desc(projects.createdAt)],
-  });
-
-  // Fetch all available skills for tagging
-  const allSkills = await db.query.skills.findMany({
-    orderBy: (skills, { asc }) => [asc(skills.name)],
-  });
+      orderBy: (projects, { desc }) => [desc(projects.createdAt)],
+    }),
+    db.query.skills.findMany({
+      orderBy: (skills, { asc }) => [asc(skills.name)],
+    }),
+  ]);
 
   return (
     <div className="space-y-6">

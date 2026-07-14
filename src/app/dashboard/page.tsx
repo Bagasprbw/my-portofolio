@@ -17,23 +17,12 @@ import {
 } from "@/db/schema";
 
 export default async function DashboardPage() {
-    const [skillsCount] = await db
-        .select({
-            count: count(),
-        })
-        .from(skills);
-
-    const [projectsCount] = await db
-        .select({
-            count: count(),
-        })
-        .from(projects);
-
-    const [experiencesCount] = await db
-        .select({
-            count: count(),
-        })
-        .from(experiences);
+    const [[skillsCount], [projectsCount], [experiencesCount]] =
+        await Promise.all([
+            db.select({ count: count() }).from(skills),
+            db.select({ count: count() }).from(projects),
+            db.select({ count: count() }).from(experiences),
+        ]);
 
     return (
         <div>
