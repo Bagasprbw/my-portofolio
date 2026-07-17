@@ -50,8 +50,7 @@ export function HeroSection() {
         {/* Description */}
         <FadeIn delay={0.4}>
           <p className="max-w-xl mx-auto text-base text-muted-foreground leading-relaxed mb-10">
-            I build beautiful, performant, and scalable web applications with
-            modern technologies. Turning ideas into elegant digital experiences.
+            I build scalable web applications and robust backend systems that solve real business problems.
           </p>
         </FadeIn>
 

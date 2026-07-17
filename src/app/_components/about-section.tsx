@@ -45,17 +45,12 @@ export function AboutSection() {
           <StaggerContainer className="space-y-5">
             <StaggerItem>
               <p className="text-muted-foreground leading-relaxed text-base">
-                I'm <strong className="text-foreground font-semibold">Bagas Prabowo</strong>, a Full Stack Developer based in Indonesia. I specialize in building modern web applications from concept to deployment using cutting-edge technologies.
+                I'm <strong className="text-foreground font-semibold">Bagas Prabowo</strong>, a Full Stack Developer with a strong focus on backend development. I build modern, scalable, and maintainable web applications using Laravel, Vue.js, React.js, Next.js, Express.js, and Go.
               </p>
             </StaggerItem>
             <StaggerItem>
               <p className="text-muted-foreground leading-relaxed text-base">
-                My journey started with a curiosity about how websites work, which quickly grew into a passion for creating seamless digital experiences. I love bridging the gap between beautiful design and reliable backend systems.
-              </p>
-            </StaggerItem>
-            <StaggerItem>
-              <p className="text-muted-foreground leading-relaxed text-base">
-                When I'm not coding, I enjoy exploring new frameworks, contributing to open-source projects, and continuously leveling up my skills.
+                Beyond development, my expertise includes system analysis, requirements gathering, system architecture, and database design. I enjoy translating business requirements into scalable and maintainable software solutions while continuously improving my software engineering skills.
               </p>
             </StaggerItem>
 
