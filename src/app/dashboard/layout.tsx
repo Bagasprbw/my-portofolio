@@ -5,6 +5,7 @@ import {
     FolderGit2,
     BriefcaseBusiness,
     Code2,
+    GraduationCap,
 } from "lucide-react";
 
 import { getServerSession } from "next-auth";
@@ -64,6 +65,14 @@ export default async function DashboardLayout({
                     >
                         <BriefcaseBusiness size={18} />
                         Experiences
+                    </Link>
+
+                    <Link
+                        href="/dashboard/educations"
+                        className="flex items-center gap-2 rounded-lg px-3 py-2 hover:bg-muted"
+                    >
+                        <GraduationCap size={18} />
+                        Education
                     </Link>
                 </nav>
 

@@ -5,5 +5,6 @@ export * from "./projects";
 export * from "./project-skills";
 export * from "./experiences";
 export * from "./experience-skills";
+export * from "./educations";
 
 export * from "./relations";

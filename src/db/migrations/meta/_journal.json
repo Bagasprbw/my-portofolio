@@ -8,6 +8,13 @@
       "when": 1781250192826,
       "tag": "0000_chilly_namora",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1784477831754,
+      "tag": "0001_typical_wrecking_crew",
+      "breakpoints": true
     }
   ]
 }

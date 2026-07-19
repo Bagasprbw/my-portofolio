@@ -1,11 +1,12 @@
 import { db } from "@/db";
-import { projects, experiences } from "@/db/schema";
+import { projects, experiences, educations } from "@/db/schema";
 import { Navbar } from "./_components/navbar";
 import { HeroSection } from "./_components/hero-section";
 import { AboutSection } from "./_components/about-section";
 import { SkillsSection } from "./_components/skills-section";
 import { ProjectsSection } from "./_components/projects-section";
 import { ExperiencesSection } from "./_components/experiences-section";
+import { EducationSection } from "./_components/education-section";
 import { Footer } from "./_components/footer";
 import { desc } from "drizzle-orm";
 
@@ -18,7 +19,7 @@ export const metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [allSkillCategories, allProjects, allExperiences] = await Promise.all([
+  const [allSkillCategories, allProjects, allExperiences, allEducations] = await Promise.all([
     db.query.skillCategories.findMany({
       with: {
         skills: true,
@@ -40,6 +41,9 @@ export default async function HomePage() {
       },
       orderBy: [desc(experiences.startDate)],
     }),
+    db.query.educations.findMany({
+      orderBy: [desc(educations.startDate)],
+    }),
   ]);
 
   return (
@@ -51,6 +55,7 @@ export default async function HomePage() {
         <SkillsSection categories={allSkillCategories} />
         <ProjectsSection projects={allProjects} />
         <ExperiencesSection experiences={allExperiences} />
+        <EducationSection educations={allEducations} />
       </main>
       <Footer />
     </div>
