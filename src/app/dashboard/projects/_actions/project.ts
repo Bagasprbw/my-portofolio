@@ -29,7 +29,6 @@ export async function createProject(
   description: string,
   thumbnail?: string,
   url?: string,
-  featured: boolean = false,
   skillIds: string[] = []
 ) {
   try {
@@ -49,7 +48,7 @@ export async function createProject(
           description,
           thumbnail: thumbnail || null,
           url: url || null,
-          featured,
+          featured: true,
         })
         .returning();
 
@@ -80,7 +79,6 @@ export async function updateProject(
   description: string,
   thumbnail?: string,
   url?: string,
-  featured: boolean = false,
   skillIds: string[] = []
 ) {
   try {
@@ -108,7 +106,7 @@ export async function updateProject(
           description,
           thumbnail: thumbnail || null,
           url: url || null,
-          featured,
+          featured: true,
           updatedAt: new Date(),
         })
         .where(eq(projects.id, id));

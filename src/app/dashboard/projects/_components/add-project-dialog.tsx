@@ -31,7 +31,6 @@ export function AddProjectDialog({ skills }: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [url, setUrl] = useState("");
-  const [featured, setFeatured] = useState(false);
   const [selectedSkillIds, setSelectedSkillIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -88,7 +87,6 @@ export function AddProjectDialog({ skills }: Props) {
         description,
         uploadedThumbnailUrl || undefined,
         url || undefined,
-        featured,
         selectedSkillIds
       );
 
@@ -98,7 +96,6 @@ export function AddProjectDialog({ skills }: Props) {
         setFile(null);
         setPreviewUrl(null);
         setUrl("");
-        setFeatured(false);
         setSelectedSkillIds([]);
         setOpen(false);
       } else {
@@ -211,20 +208,6 @@ export function AddProjectDialog({ skills }: Props) {
                 />
               </div>
             </div>
-          </div>
-
-          <div className="flex items-center gap-2 py-2">
-            <input
-              type="checkbox"
-              id="featured"
-              checked={featured}
-              onChange={(e) => setFeatured(e.target.checked)}
-              disabled={loading}
-              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-            />
-            <label htmlFor="featured" className="text-sm font-medium select-none cursor-pointer">
-              Mark as Featured Project
-            </label>
           </div>
 
           <div className="space-y-2">

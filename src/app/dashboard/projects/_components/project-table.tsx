@@ -11,7 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Trash2, Link2, ExternalLink, Star, Briefcase } from "lucide-react";
+import { Trash2, Link2, ExternalLink, Briefcase } from "lucide-react";
 import { deleteProject } from "../_actions/project";
 import { EditProjectDialog } from "./edit-project-dialog";
 
@@ -73,9 +73,6 @@ export function ProjectTable({ projects, skills }: Props) {
               </th>
               <th className="p-4 text-left font-medium text-muted-foreground">
                 Skills Used
-              </th>
-              <th className="p-4 text-left font-medium text-muted-foreground w-[120px]">
-                Status
               </th>
               <th className="p-4 text-right font-medium text-muted-foreground w-[150px]">
                 Actions
@@ -144,17 +141,6 @@ export function ProjectTable({ projects, skills }: Props) {
                       <span className="text-xs text-muted-foreground">-</span>
                     )}
                   </div>
-                </td>
-
-                <td className="p-4">
-                  {project.featured ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200 px-2.5 py-0.5 text-xs font-semibold text-amber-700 dark:bg-amber-950/20 dark:border-amber-900/50 dark:text-amber-400">
-                      <Star size={10} className="fill-amber-500 stroke-amber-500" />
-                      Featured
-                    </span>
-                  ) : (
-                    <span className="text-xs text-muted-foreground">Standard</span>
-                  )}
                 </td>
 
                 <td className="p-4">

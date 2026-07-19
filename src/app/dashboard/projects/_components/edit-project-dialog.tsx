@@ -46,7 +46,6 @@ export function EditProjectDialog({ project, skills }: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(project.thumbnail || null);
   const [url, setUrl] = useState(project.url || "");
-  const [featured, setFeatured] = useState(project.featured);
   const [selectedSkillIds, setSelectedSkillIds] = useState<string[]>(
     project.projectSkills.map((ps) => ps.skill.id)
   );
@@ -111,7 +110,6 @@ export function EditProjectDialog({ project, skills }: Props) {
         description,
         finalThumbnailUrl || undefined,
         url || undefined,
-        featured,
         selectedSkillIds
       );
 
@@ -226,20 +224,6 @@ export function EditProjectDialog({ project, skills }: Props) {
                 />
               </div>
             </div>
-          </div>
-
-          <div className="flex items-center gap-2 py-2">
-            <input
-              type="checkbox"
-              id={`featured-${project.id}`}
-              checked={featured}
-              onChange={(e) => setFeatured(e.target.checked)}
-              disabled={loading}
-              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
-            />
-            <label htmlFor={`featured-${project.id}`} className="text-sm font-medium select-none cursor-pointer">
-              Mark as Featured Project
-            </label>
           </div>
 
           <div className="space-y-2">

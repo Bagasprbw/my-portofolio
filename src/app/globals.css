@@ -159,3 +159,15 @@
 .dark .custom-scrollbar {
   scrollbar-color: oklch(1 0 0 / 10%) transparent;
 }
+
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
