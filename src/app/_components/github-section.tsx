@@ -177,7 +177,7 @@ export function GithubSection() {
                 <img
                   src="https://ghchart.rshah.org/216e39/Bagasprbw"
                   alt="GitHub Contribution Calendar for Bagasprbw"
-                  className="w-full min-w-[600px] opacity-90 hover:opacity-100 transition-opacity rounded"
+                  className="w-full max-w-full h-auto opacity-90 hover:opacity-100 transition-opacity rounded"
                   onError={(e) => {
                     // Fallback: activity graph with green theme
                     (e.target as HTMLImageElement).src =
