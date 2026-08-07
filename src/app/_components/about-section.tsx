@@ -2,94 +2,83 @@ import { Code2, Heart, Lightbulb, Zap } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "./scroll-animation";
 
 const values = [
-  {
-    icon: Code2,
-    title: "Clean Code",
-    description: "I write readable, maintainable code following best practices and design patterns.",
-  },
-  {
-    icon: Zap,
-    title: "Performance",
-    description: "I optimize for speed and efficiency, ensuring buttery smooth user experiences.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Problem Solver",
-    description: "I approach every challenge with creative thinking and analytical mindset.",
-  },
-  {
-    icon: Heart,
-    title: "Passionate",
-    description: "I genuinely love what I do and constantly keep up with the latest in tech.",
-  },
+  { icon: Code2,     title: "Clean Code",     desc: "Readable, maintainable code following best practices & design patterns." },
+  { icon: Zap,       title: "Performance",    desc: "Optimizing for speed and efficiency — buttery smooth user experiences." },
+  { icon: Lightbulb, title: "Problem Solver", desc: "Creative thinking meets analytical mindset to tackle any challenge." },
+  { icon: Heart,     title: "Passionate",     desc: "Genuinely love building products and staying ahead of the tech curve." },
 ];
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-24 relative">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section heading */}
+    <section id="about" className="py-28 relative overflow-hidden landing-bg">
+
+      {/* ── 3D METALLIC SPHERES BACKGROUND ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="sphere-3d-alt" style={{ width: 200, height: 200, top: "10%", right: "-40px", animationDelay: "1s" }} />
+        <div className="sphere-3d" style={{ width: 140, height: 140, bottom: "15%", left: "-30px", animationDelay: "3s" }} />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         <FadeIn direction="up">
-          <div className="mb-16 text-center">
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">
-              About Me
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+          <div className="text-center mb-16">
+            <span className="section-badge mb-4 inline-flex">About Me</span>
+            <h2 className="text-4xl font-bold text-white" style={{ fontFamily:"var(--font-heading)" }}>
               Who I Am
             </h2>
           </div>
         </FadeIn>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left – text */}
-          <StaggerContainer className="space-y-5">
-            <StaggerItem>
-              <p className="text-muted-foreground leading-relaxed text-base">
-                I'm <strong className="text-foreground font-semibold">Bagas Prabowo</strong>, a Full Stack Developer with a strong focus on backend development. I build modern, scalable, and maintainable web applications using Laravel, Vue.js, React.js, Next.js, Express.js, and Go.
-              </p>
-            </StaggerItem>
-            <StaggerItem>
-              <p className="text-muted-foreground leading-relaxed text-base">
-                Beyond development, my expertise includes system analysis, requirements gathering, system architecture, and database design. I enjoy translating business requirements into scalable and maintainable software solutions while continuously improving my software engineering skills.
-              </p>
-            </StaggerItem>
+        {/* ── 1 Single Card Left + 4 Cards Right (2x2 Grid) ── */}
+        <div className="grid lg:grid-cols-12 gap-6 items-stretch">
 
-            <StaggerItem>
-              <div className="pt-4 flex flex-wrap gap-4">
-                <a
-                  href="/Bagas Prabowo_CV_Full Stack Developer.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all hover:scale-105 shadow-md shadow-primary/20"
-                >
+          {/* LEFT — 1 Single Bio Card */}
+          <FadeIn direction="right" className="lg:col-span-6 flex">
+            <div className="glass-card rounded-3xl p-8 flex flex-col justify-between h-full w-full relative overflow-hidden">
+              {/* Top shimmer line */}
+              <div className="absolute top-0 inset-x-0 h-px bg-white/30 pointer-events-none"/>
+
+              <div className="space-y-5">
+                <p className="text-slate-300 leading-relaxed text-[15px]">
+                  I&apos;m <strong className="text-white font-semibold">Bagas Prabowo</strong>, a Full Stack Developer with a strong focus on backend development. I build modern, scalable, and maintainable web applications using <strong className="text-white">Laravel</strong>, <strong className="text-white">Vue.js</strong>, <strong className="text-white">React.js</strong>, <strong className="text-white">Next.js</strong>, <strong className="text-white">Express.js</strong>, and <strong className="text-white">Go</strong>.
+                </p>
+
+                <p className="text-slate-300 leading-relaxed text-[15px]">
+                  Beyond development, my expertise includes system analysis, requirements gathering, system architecture, and database design. I enjoy translating business requirements into scalable and maintainable software solutions while continuously improving my software engineering skills.
+                </p>
+              </div>
+
+              {/* CTA Buttons at bottom */}
+              <div className="flex flex-wrap gap-3 mt-8 pt-4">
+                <a href="/Bagas Prabowo_CV_FullStack Developer.pdf" target="_blank" rel="noreferrer"
+                  className="btn-sky inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm">
                   Download CV
                 </a>
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-border bg-muted/50 text-sm font-semibold hover:bg-muted transition-all"
-                >
-                  Let's Talk
+                <a href="#contact" className="btn-ghost inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm">
+                  Let&apos;s Talk
                 </a>
               </div>
-            </StaggerItem>
-          </StaggerContainer>
+            </div>
+          </FadeIn>
 
-          {/* Right – value cards */}
-          <StaggerContainer className="grid grid-cols-2 gap-4">
-            {values.map((item) => {
-              const Icon = item.icon;
+          {/* RIGHT — 4 Cards in 2x2 Grid */}
+          <StaggerContainer className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {values.map(v => {
+              const Icon = v.icon;
               return (
-                <StaggerItem key={item.title}>
-                  <div
-                    className="group p-5 rounded-2xl border border-border bg-card hover:bg-muted/30 hover:border-primary/30 transition-all hover:shadow-md hover:-translate-y-1 h-full"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
-                      <Icon size={18} className="text-primary" />
+                <StaggerItem key={v.title}>
+                  <div className="glass-card rounded-3xl p-6 h-full flex flex-col justify-between relative overflow-hidden">
+                    <div className="absolute top-0 inset-x-0 h-px bg-white/20 pointer-events-none"/>
+                    <div>
+                      <div className="w-11 h-11 rounded-2xl flex items-center justify-center mb-4 bg-white/10 border border-white/20 text-white">
+                        <Icon size={20} />
+                      </div>
+                      <p className="font-bold text-base text-white mb-2" style={{ fontFamily:"var(--font-heading)" }}>
+                        {v.title}
+                      </p>
+                      <p className="text-xs text-slate-400 leading-relaxed">
+                        {v.desc}
+                      </p>
                     </div>
-                    <h3 className="font-semibold text-sm mb-1">{item.title}</h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {item.description}
-                    </p>
                   </div>
                 </StaggerItem>
               );

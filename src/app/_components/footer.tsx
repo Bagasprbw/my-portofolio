@@ -1,97 +1,84 @@
-import { Mail, Code2, ArrowUp } from "lucide-react";
+import { Mail, ArrowUp, ArrowRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./brand-icons";
+import { FadeIn } from "./scroll-animation";
+
+const contacts = [
+  { href:"mailto:bagasprabowo2412@gmail.com", label:"Email me at", value:"bagasprabowo2412@gmail.com",
+    icon:<Mail size={18}/>, external:false },
+  { href:"https://github.com/Bagasprbw", label:"Find me on GitHub", value:"github.com/Bagasprbw",
+    icon:<GithubIcon size={18}/>, external:true },
+  { href:"https://www.linkedin.com/in/bagas-prabowo-367932340", label:"Connect on LinkedIn", value:"linkedin.com/in/bagas-prabowo",
+    icon:<LinkedinIcon size={18}/>, external:true },
+];
 
 export function Footer() {
   const year = new Date().getFullYear();
-
   return (
-    <footer id="contact" className="border-t border-border bg-card">
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 gap-12 items-start mb-12">
-          {/* Left – CTA */}
-          <div>
-            <span className="text-xs font-semibold tracking-widest uppercase text-primary mb-3 block">
-              Contact
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Let's Build Something Together
+    <footer id="contact" className="relative overflow-hidden landing-bg border-t border-white/10">
+
+      {/* ── 3D METALLIC SPHERES BACKGROUND ── */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="sphere-3d" style={{ width: 220, height: 220, bottom: "-60px", left: "-40px", animationDelay: "0s" }} />
+        <div className="sphere-3d-alt" style={{ width: 140, height: 140, top: "10%", right: "5%", animationDelay: "3s" }} />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
+
+        {/* CTA headline + contact grid */}
+        <div className="grid lg:grid-cols-2 gap-14 items-start mb-16">
+
+          {/* Left */}
+          <FadeIn direction="right">
+            <span className="section-badge mb-5 inline-flex">Contact</span>
+            <h2 className="text-4xl font-bold text-white mb-4 leading-tight" style={{ fontFamily:"var(--font-heading)" }}>
+              Let&apos;s build something{" "}
+              <span className="gradient-text">extraordinary</span>{" "}together
             </h2>
-            <p className="text-muted-foreground leading-relaxed max-w-sm">
-              I'm always open to interesting conversations, collaborations, and
-              new opportunities. Drop me a message!
+            <p className="text-slate-400 leading-relaxed max-w-sm mb-7">
+              I&apos;m open to interesting conversations, collaborations, and new opportunities. Let&apos;s connect!
             </p>
-          </div>
-
-          {/* Right – contact */}
-          <div className="space-y-4">
-            <a
-              href="mailto:bagasprabowo2412@gmail.com"
-              className="group flex items-center gap-4 p-4 rounded-2xl border border-border bg-background hover:border-primary/40 hover:bg-muted/40 hover:shadow-md transition-all"
-            >
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <Mail size={18} className="text-primary" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground font-medium">Email me at</p>
-                <p className="text-sm font-semibold text-foreground">
-                  bagasprabowo2412@gmail.com
-                </p>
-              </div>
+            <a href="mailto:bagasprabowo2412@gmail.com"
+              className="btn-sky inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl text-sm">
+              Send me a message <ArrowRight size={15}/>
             </a>
+          </FadeIn>
 
-            <a
-              href="https://github.com/Bagasprbw"
-              target="_blank"
-              rel="noreferrer"
-              className="group flex items-center gap-4 p-4 rounded-2xl border border-border bg-background hover:border-primary/40 hover:bg-muted/40 hover:shadow-md transition-all"
-            >
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <GithubIcon size={18} className="text-primary" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground font-medium">Find me on GitHub</p>
-                <p className="text-sm font-semibold text-foreground">
-                  https://github.com/Bagasprbw
-                </p>
-              </div>
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/bagas-prabowo-367932340"
-              target="_blank"
-              rel="noreferrer"
-              className="group flex items-center gap-4 p-4 rounded-2xl border border-border bg-background hover:border-primary/40 hover:bg-muted/40 hover:shadow-md transition-all"
-            >
-              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <LinkedinIcon size={18} className="text-primary" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground font-medium">Connect on LinkedIn</p>
-                <p className="text-sm font-semibold text-foreground">
-                  https://www.linkedin.com/in/bagas-prabowo-367932340
-                </p>
-              </div>
-            </a>
-          </div>
+          {/* Right — contact cards */}
+          <FadeIn direction="left">
+            <div className="space-y-4">
+              {contacts.map(c => (
+                <a key={c.href} href={c.href}
+                  target={c.external ? "_blank" : undefined}
+                  rel={c.external ? "noreferrer" : undefined}
+                  className="glass-card group flex items-center gap-4 p-4 rounded-2xl">
+                  <div className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 bg-white/10 border border-white/20 text-white">
+                    {c.icon}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[11px] text-slate-400 font-medium">{c.label}</p>
+                    <p className="text-sm font-semibold text-white truncate">{c.value}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </FadeIn>
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-              <Code2 size={13} className="text-primary-foreground" />
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl flex items-center justify-center bg-white/10 border border-white/20">
+              <img src="/Icon.png" alt="Logo" className="w-5 h-5 object-contain"/>
             </div>
-            <span className="font-semibold text-sm">Bagas Prabowo</span>
+            <span className="font-bold text-sm text-white" style={{ fontFamily:"var(--font-heading)" }}>Bagas Prabowo</span>
           </div>
-          <p className="text-xs text-muted-foreground text-center">
-            © {year} Bagas Prabowo. Built with Next.js & ❤️.
+
+          <p className="text-xs text-slate-400">
+            © {year} Bagas Prabowo. Built with Next.js &amp; ❤️
           </p>
-          <a
-            href="#hero"
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Back to top
-            <ArrowUp size={13} />
+
+          <a href="#hero" className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors group" style={{ fontFamily:"var(--font-heading)" }}>
+            Back to top <ArrowUp size={13} className="group-hover:-translate-y-0.5 transition-transform"/>
           </a>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { HeroSection } from "./_components/hero-section";
 import { AboutSection } from "./_components/about-section";
 import { SkillsSection } from "./_components/skills-section";
 import { ProjectsSection } from "./_components/projects-section";
+import { GithubSection } from "./_components/github-section";
 import { ExperiencesSection } from "./_components/experiences-section";
 import { EducationSection } from "./_components/education-section";
 import { Footer } from "./_components/footer";
@@ -47,7 +48,7 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground">
       <Navbar />
       <main>
         <HeroSection />
@@ -56,6 +57,7 @@ export default async function HomePage() {
         <ProjectsSection projects={allProjects} />
         <ExperiencesSection experiences={allExperiences} />
         <EducationSection educations={allEducations} />
+        <GithubSection />
       </main>
       <Footer />
     </div>
