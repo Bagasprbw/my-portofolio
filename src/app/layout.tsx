@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Bricolage_Grotesque } from "next/font/google";
+import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const dmSans = DM_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const bricolageGrotesque = Bricolage_Grotesque({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -21,9 +21,7 @@ export const metadata: Metadata = {
     google: "5wnbZ4cuIbWkjAVo7_s0gHxeCW_VBQ-LSE1Y_N-quNw",
   },
   icons: {
-    icon: [
-      { url: "/Icon.png", type: "image/png" },
-    ],
+    icon: [{ url: "/Icon.png", type: "image/png" }],
     shortcut: "/Icon.png",
     apple: "/Icon.png",
   },
@@ -37,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${bricolageGrotesque.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
