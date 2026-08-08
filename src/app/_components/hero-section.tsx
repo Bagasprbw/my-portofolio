@@ -76,7 +76,7 @@ export function HeroSection() {
                 <a href="#projects" className="btn-sky inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl text-sm">
                   See My Work <ArrowRight size={15}/>
                 </a>
-                <a href="/Bagas Prabowo_CV_Full Stack Developer.pdf" target="_blank" rel="noreferrer"
+                <a href="/Bagas Prabowo_CV_Full StackDeveloper.pdf" target="_blank" rel="noreferrer"
                   className="btn-ghost inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl text-sm">
                   <Download size={15}/> Download CV
                 </a>
